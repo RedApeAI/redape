@@ -1,0 +1,87 @@
+/*
+  RedApe design tokens — pulled from the Figma first draft
+  (node 3139:10741, "MacBook Pro 16" - 2").
+  Single source of truth for color, type and radius across the site.
+*/
+@theme {
+  /* ---- Brand colors ---- */
+  --color-ink: #202020;
+  --color-ink-soft: #303030;
+  --color-muted: #606060;
+  --color-muted-2: #666666;
+  --color-line: #d9d9d9;
+  --color-line-soft: #dcdcdc;
+  --color-paper: #fefefe;
+  --color-surface: #f6f5f3;
+  --color-surface-2: #f6f3f3;
+  --color-surface-3: #f1f0ee;
+  --color-surface-4: #f2f2f2;
+  --color-chip: #eaeaea;
+  --color-chip-dark: #1e1e1e;
+
+  --color-brand-red: #ff0022;
+  --color-brand-blue: #0062ff;
+  --color-brand-green: #1beb00;
+
+  /* accent dots used across feature pills */
+  --color-accent-green: #5dc983;
+  --color-accent-red: #ff2f2f;
+  --color-accent-indigo: #5e6ad2;
+  --color-accent-yellow: #f2be00;
+  --color-accent-violet: #8a43e1;
+  --color-accent-magenta: #d511fd;
+
+  /* ---- Typography ---- */
+  --font-display: "Google Sans Flex", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-ui: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /*
+    Fluid type scale. Every size interpolates between a phone value and the
+    design's desktop value across roughly 375px -> 1200px, so nothing is a
+    fixed pixel size that has to be re-declared per breakpoint. The comment
+    on each line is the min -> max in px.
+  */
+  --text-display: clamp(2.5rem, 1.56rem + 4vw, 4.25rem); /* 40 -> 68 */
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.028em;
+
+  --text-h2: clamp(2rem, 1.3rem + 3vw, 3.5rem); /* 32 -> 56 */
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.025em;
+
+  --text-h3: clamp(1.25rem, 1.13rem + 0.5vw, 1.5rem); /* 20 -> 24 */
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.02em;
+
+  --text-lead: clamp(1rem, 0.93rem + 0.3vw, 1.1875rem); /* 16 -> 19 */
+  --text-lead--line-height: 1.55;
+
+  --text-body: clamp(0.9375rem, 0.9rem + 0.16vw, 1.0625rem); /* 15 -> 17 */
+  --text-body--line-height: 1.55;
+
+  --text-nav: clamp(0.9375rem, 0.91rem + 0.11vw, 1rem); /* 15 -> 16 */
+  --text-nav--line-height: 1.2;
+
+  --text-wordmark: clamp(1.25rem, 1.06rem + 0.8vw, 1.5rem); /* 20 -> 24 */
+  --text-wordmark--line-height: 1;
+  --text-wordmark--letter-spacing: -0.02em;
+
+  --text-eyebrow: clamp(0.8125rem, 0.78rem + 0.16vw, 0.9375rem); /* 13 -> 15 */
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.12em;
+
+  --text-micro: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem); /* 12 -> 13 */
+  --text-micro--line-height: 1.4;
+
+  /* ---- Radius ---- */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-panel: 24px;
+  --radius-pill: 18px;
+
+  /* ---- Navbar ---- */
+  --color-nav-dark: #171717;
+  /* How long the bar takes to collapse into its scrolled pill. */
+  --ease-nav: cubic-bezier(0.22, 1, 0.36, 1);
+}
