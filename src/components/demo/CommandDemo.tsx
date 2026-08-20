@@ -139,7 +139,7 @@ export function CommandDemo() {
               aria-hidden
               className="pointer-events-none absolute -inset-[2px] overflow-hidden rounded-[14px]"
             >
-              <span className="absolute left-1/2 top-1/2 aspect-square w-[160%] -translate-x-1/2 -translate-y-1/2 animate-[spin_1.1s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_250deg,#ff8a8a_310deg,#ff0022_340deg,transparent_360deg)]" />
+              <span className="absolute left-1/2 top-1/2 aspect-square w-[170%] -translate-x-1/2 -translate-y-1/2 animate-[spin_1.15s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_170deg,rgba(255,0,34,0.18)_250deg,#ff5470_318deg,#ff0022_350deg,transparent_360deg)]" />
               <span className="absolute inset-[2px] rounded-[12px] bg-white" />
             </span>
           )}
@@ -208,7 +208,7 @@ export function CommandDemo() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.98 }}
                 transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute left-1/2 top-1/2 z-20 flex max-w-full -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 rounded-full bg-[#1e1e1e] px-5 py-3 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.5)]"
+                className="absolute left-1/2 top-1/2 z-20 flex max-w-full -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 rounded-full bg-[#1e1e1e] px-5 py-3 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.5)] sm:whitespace-nowrap"
               >
                 <svg viewBox="0 0 20 20" className="size-5 shrink-0" aria-hidden>
                   <circle cx="10" cy="10" r="10" fill="#31c56a" />
