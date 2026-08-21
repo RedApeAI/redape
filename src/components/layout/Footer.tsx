@@ -1,5 +1,7 @@
 import { Reveal } from "../motion/Reveal";
+// import { MaskIcon } from "../ui/MaskIcon";
 import logoMark from "../../assets/icons/logo-mark.svg";
+// import pixelApe from "../../assets/graphics/pixelape.svg";
 import {
   MarkArcs,
   MarkAsterisk,
@@ -7,6 +9,7 @@ import {
   MarkSlash,
   MarkSparkle,
 } from "./AssistantMarks";
+import { FaInstagram, FaLinkedin, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
 const assistants = [
   { label: "ChatGPT", mark: <MarkKnot /> },
@@ -14,6 +17,13 @@ const assistants = [
   { label: "Perplexity", mark: <MarkArcs /> },
   { label: "Gemini", mark: <MarkSparkle /> },
   { label: "Grok", mark: <MarkSlash /> },
+];
+
+const socials = [
+  { label: "LinkedIn", mark: <FaLinkedin /> },
+  { label: "X", mark: <FaXTwitter /> },
+  { label: "YouTube", mark: <FaYoutube /> },
+  { label: "Instagram", mark: <FaInstagram /> },
 ];
 
 const groups = [
@@ -45,7 +55,7 @@ const linkClass =
  */
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-paper">
+    <footer className="relative overflow-hidden bg-[#F7F5F5]">
       <div className="mx-auto w-full max-w-[1728px] px-4 sm:px-[84px]">
         {/* ask-an-assistant row */}
         <div className="flex flex-wrap items-center gap-x-5 gap-y-4 py-10">
@@ -71,7 +81,10 @@ export function Footer() {
           <Reveal y={24}>
             <div className="grid gap-12 py-16 lg:grid-cols-[1.4fr_repeat(4,1fr)] lg:gap-10 lg:py-20">
               <div className="flex max-w-[42ch] flex-col items-start gap-5">
-                <span className="font-sans text-wordmark font-bold text-ink">RedApe</span>
+                <a href="#top" className="flex items-center gap-1.5">
+                  <img src={logoMark} alt="" aria-hidden className="h-8 w-auto" />
+                  <span className="font-sans text-wordmark font-bold text-ink">RedApe</span>
+                </a>
                 <p className="font-sans text-body text-muted">
                   The AI sales workforce that chases every lead, writes every follow-up, and
                   keeps the pipeline honest.
@@ -79,6 +92,19 @@ export function Footer() {
                 <p className="font-mono-ui text-micro text-muted-2">
                   Made with <span aria-hidden>🐒</span> in India &amp; worldwide
                 </p>
+                <ul className="flex items-center gap-4">
+                  {socials.map((social) => (
+                    <li key={social.label}>
+                      <a
+                        href="#"
+                        aria-label={social.label}
+                        className="flex text-[18px] text-muted-2 transition-colors duration-200 hover:text-ink"
+                      >
+                        {social.mark}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {groups.map((group) => (
@@ -104,22 +130,37 @@ export function Footer() {
 
       {/*
         The oversized mark is the bottom band's background. It is pushed
-        below the baseline so only its top half shows, and the legal row is
-        laid over it rather than pushed down by it.
+        below the baseline so only its top half shows, and the social row
+        plus legal row are laid over it rather than pushed down by it.
       */}
       <div className="relative border-t border-line-soft">
-        <img
-          src={logoMark}
-          alt=""
+        {/*
+          Pixel-traced version of the mark (vs. the plain silhouette used
+          above) so the watermark actually carries a face. `MaskIcon` draws
+          it as a flat-tinted shape; the eye slit is a solid patch of that
+          tint, so a small paper-coloured dot slid across it reads as the
+          eye glancing side to side rather than a redraw of the artwork.
+        */}
+        {/* <div
           aria-hidden
-          className="pointer-events-none absolute bottom-[-40px] left-1/2 h-[240px] -translate-x-1/2 opacity-[0.055] sm:h-[320px]"
-        />
+          className="pointer-events-none absolute bottom-[-40px] left-1/2 aspect-[116/120] h-[240px] -translate-x-1/2 sm:h-[320px]"
+        >
+          <MaskIcon src={pixelApe} className="absolute inset-0 size-full text-ink " />
+          <span
+            aria-hidden
+            className="animate-eye-shift absolute rounded-full bg-[#F7F5F5]"
+            style={{ width: "2.2%", height: "2.2%", top: "40.6%", left: "63%" }}
+          />
+        </div> */}
 
-        <div className="relative mx-auto w-full max-w-[1728px] px-4 sm:px-[84px]">
-          <div className="flex flex-col gap-3 py-7 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-sans text-micro text-muted-2">
-              © {new Date().getFullYear()} RedApe. All rights reserved.
-            </p>
+        <div className="relative mx-auto w-full max-w-[1728px] px-4 sm:px-[84px]" style={{"height": "10px", "paddingBottom": "240px"}}>
+          <div className="flex flex-col gap-3 pt-10 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2">
+              <img src={logoMark} alt="" aria-hidden className="h-4 w-auto opacity-70" />
+              <p className="font-sans text-micro text-muted-2">
+                RedApe © {new Date().getFullYear()}. All rights reserved.
+              </p>
+            </div>
             <div className="flex items-center gap-6">
               <a href="#" className="font-sans text-micro text-muted-2 hover:text-ink">
                 Terms
@@ -131,7 +172,7 @@ export function Footer() {
           </div>
 
           {/* room for the mark to show through under the legal row */}
-          <div aria-hidden className="h-[130px] sm:h-[190px]" />
+          <div aria-hidden className="h-[70px] sm:h-[240px]" />
         </div>
       </div>
     </footer>

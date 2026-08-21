@@ -50,8 +50,32 @@
   animation-iteration-count: infinite;
 }
 
+/*
+  The footer mark's eye glint — a small dot sliding across the eye slit and
+  pausing at each side, so it reads as glancing around rather than jittering.
+*/
+@keyframes eye-shift {
+  0%,
+  8% {
+    left: 63%;
+  }
+  42%,
+  50% {
+    left: 73%;
+  }
+  92%,
+  100% {
+    left: 63%;
+  }
+}
+
+.animate-eye-shift {
+  animation: eye-shift 5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-eye-shift {
     animation: none;
   }
 
