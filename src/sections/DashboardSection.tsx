@@ -1,152 +1,95 @@
 import { Reveal } from "../components/motion/Reveal";
 import { SectionIntro } from "../components/ui/SectionIntro";
-import chartIcon from "../assets/icons/chart.svg";
-import chartUpIcon from "../assets/icons/chart-up.svg";
-import conferenceIcon from "../assets/icons/conference.svg";
-import speechIcon from "../assets/icons/speech.svg";
+import { FitStage } from "../components/ui/FitStage";
+import { GridTile } from "../components/graphics/GridTile";
+import { StatCards } from "../components/dashboard/StatCards";
+import { QuickActions } from "../components/dashboard/QuickActions";
+import { CalendarCard } from "../components/dashboard/CalendarCard";
+import { FunnelCard } from "../components/dashboard/FunnelCard";
+import bandMosaic from "../assets/backgrounds/band-mosaic.png";
+import hatchTile from "../assets/backgrounds/hatch-tile.png";
 
-const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
-const monthDays = Array.from({ length: 30 }, (_, i) => i + 1);
-const today = 17;
+/** The canvas the four widgets are positioned on, straight from node 3144:10159. */
+const STAGE = { width: 1385, height: 757 };
 
-const events = [
-  { icon: conferenceIcon, title: "Pipeline review call", time: "10:00 AM – 10:30 AM" },
-  { icon: speechIcon, title: "Follow-up: Meridian Corp", time: "2:15 PM – 2:45 PM" },
-];
+/** Where each widget sits on that canvas. */
+const PLACES = {
+  stats: { left: 348, top: 153.21 },
+  actions: { left: 686.17, top: 158.04 },
+  calendar: { left: 329, top: 362.92 },
+  funnel: { left: 685.69, top: 362.92 },
+};
 
-const funnel = [
-  { label: "New Leads", value: "652", pct: 100 },
-  { label: "AI Contacted", pct: 72 },
-  { label: "Proposal send", pct: 49 },
-  { label: "Meet schedules", pct: 17 },
-  { label: "Deal Closed", pct: 10 },
-];
-
-const stats = [
-  { value: "1,482", label: "New Opportunities" },
-  { value: "11,703", label: "Proposals Sent" },
-  { value: "112", label: "Ready to close" },
-];
-
-const quickActions = [
-  "Summarize list of most asked questions.",
-  "Exports the data in an excel for last week",
-  "Prepare reminder AI calls tables with trackers",
-];
-
-/** node 3139:11198 "Frame 2147263272" — the blue dashboard showcase. */
+/**
+ * node 3144:10090 "Frame 2147263272" — "You're getting leads. So why
+ * aren't they buying?"
+ *
+ * Same shape as the command section: blueprint band behind the heading,
+ * then a blue panel inset 84px either side. Inside it the four dashboard
+ * widgets sit at fixed offsets around a hatched plate, so the whole
+ * composition is scaled as one rather than reflowed.
+ */
 export function DashboardSection() {
   return (
-    <section className="bg-paper py-24">
-      <SectionIntro
-        headline={<>You&rsquo;re getting leads. So why aren&rsquo;t they buying?</>}
-        body={
-          <>
-            RedApe doesn&rsquo;t just find leads — it tracks every reply, every meeting, and every
-            stalled deal, so you always know exactly where the funnel is leaking.
-          </>
-        }
-        className="mb-14"
-      />
+    <section className="relative overflow-hidden bg-paper">
+      {/* grid band behind the heading */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 hidden h-[551px] md:block">
+        <GridTile />
+        <GridTile mirrored />
+      </div>
 
-      <Reveal y={56} delay={0.1}>
-        <div data-nav-theme="dark" className="bg-brand-blue px-4 py-16 sm:px-10 md:py-24">
-          <div className="mx-auto grid max-w-[1100px] gap-6 lg:grid-cols-[1fr_1.1fr]">
-            {/* Calendar widget */}
-            <div className="flex flex-col gap-5 rounded-[20px] bg-white p-6 shadow-[0_30px_70px_-25px_rgba(3,20,60,0.5)] sm:p-7">
-              <div className="flex items-baseline justify-between">
-                <div>
-                  <p className="font-sans text-micro font-medium uppercase tracking-wide text-muted">
-                    Tuesday
-                  </p>
-                  <p className="font-display text-h3 font-bold text-ink">March 17</p>
-                </div>
-                <span className="rounded-full bg-surface-4 px-3 py-1 font-mono-ui text-micro font-medium text-muted">
-                  Today
-                </span>
+      <div className="relative mx-auto w-full max-w-[1728px] px-4 sm:px-[84px]">
+        <SectionIntro
+          headline={<>You&rsquo;re getting leads. So why aren&rsquo;t they buying?</>}
+          body={
+            <>
+              RedApe doesn&rsquo;t just find leads — it tracks every reply, every meeting, and every
+              stalled deal, so you always know exactly where the funnel is leaking.
+            </>
+          }
+          className="pb-[30px] pt-16 lg:pt-[100px]"
+        />
+
+        <Reveal y={56} delay={0.1}>
+          <div
+            data-nav-theme="dark"
+            className="relative overflow-hidden bg-brand-blue px-4 py-[47px] sm:px-10"
+          >
+            <img
+              src={bandMosaic}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 size-full object-bottom"
+            />
+
+            <FitStage {...STAGE} minScale={0.5} className="relative">
+              {/* hatched plate the widgets overlap */}
+              <div
+                aria-hidden
+                className="absolute left-1/2 top-1/2 h-[312.56px] w-[557.211px] -translate-x-1/2 -translate-y-1/2 border border-[rgba(51,13,221,0.5)] bg-[linear-gradient(to_top,#f3f3f3_96.882%,#053583_96.882%)]"
+              >
+                <div
+                  className="absolute inset-0 opacity-10"
+                  style={{ backgroundImage: `url(${hatchTile})`, backgroundSize: "11.2px 11.2px" }}
+                />
               </div>
 
-              <div className="grid grid-cols-7 gap-y-2 text-center">
-                {weekdays.map((d, i) => (
-                  <span key={`h-${i}`} className="font-mono-ui text-micro font-medium text-muted">
-                    {d}
-                  </span>
-                ))}
-                {monthDays.map((day) => (
-                  <span
-                    key={day}
-                    className={`mx-auto flex size-7 items-center justify-center rounded-full font-mono-ui text-micro ${
-                      day === today ? "bg-ink text-white" : "text-ink/70"
-                    }`}
-                  >
-                    {day}
-                  </span>
-                ))}
+              <div className="absolute" style={PLACES.stats}>
+                <StatCards />
               </div>
-
-              <div className="flex flex-col gap-2 border-t border-line-soft pt-4">
-                {events.map((event) => (
-                  <div
-                    key={event.title}
-                    className="flex items-center gap-3 rounded-xl bg-surface-4 px-3 py-2.5"
-                  >
-                    <img src={event.icon} alt="" className="size-5 shrink-0" />
-                    <div className="min-w-0">
-                      <p className="truncate font-sans text-body font-medium text-ink">{event.title}</p>
-                      <p className="font-mono-ui text-micro text-muted">{event.time}</p>
-                    </div>
-                  </div>
-                ))}
+              <div className="absolute" style={PLACES.actions}>
+                <QuickActions />
               </div>
-            </div>
-
-            {/* Funnel + stats widget */}
-            <div className="flex flex-col gap-5 rounded-[20px] bg-white p-6 shadow-[0_30px_70px_-25px_rgba(3,20,60,0.5)] sm:p-7">
-              <div className="grid grid-cols-3 gap-3">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="rounded-xl bg-surface-4 p-3">
-                    <p className="font-display text-h3 font-bold text-ink">{stat.value}</p>
-                    <p className="font-mono-ui text-micro text-muted">{stat.label}</p>
-                  </div>
-                ))}
+              <div className="absolute" style={PLACES.calendar}>
+                <CalendarCard />
               </div>
-
-              <div className="flex items-center gap-2">
-                <img src={chartIcon} alt="" className="size-5" />
-                <p className="font-sans text-body font-semibold text-ink">AI Sales Assistance funnel</p>
+              <div className="absolute" style={PLACES.funnel}>
+                <FunnelCard />
               </div>
-
-              <div className="flex flex-col gap-2">
-                {funnel.map((tier) => (
-                  <div key={tier.label} className="flex items-center gap-3">
-                    <span className="w-[92px] shrink-0 font-mono-ui text-micro text-muted">
-                      {tier.label}
-                    </span>
-                    <div className="h-2 flex-1 overflow-hidden rounded-full bg-surface-4">
-                      <div
-                        className="h-full rounded-full bg-brand-blue"
-                        style={{ width: `${tier.pct}%` }}
-                      />
-                    </div>
-                    <span className="w-10 shrink-0 text-right font-mono-ui text-micro font-medium text-ink">
-                      {tier.value ?? `${tier.pct}%`}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-2 border-t border-line-soft pt-4">
-                {quickActions.map((action) => (
-                  <div key={action} className="flex items-center gap-2">
-                    <img src={chartUpIcon} alt="" className="size-4 shrink-0 opacity-60" />
-                    <p className="font-mono-ui text-micro text-muted">{action}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            </FitStage>
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

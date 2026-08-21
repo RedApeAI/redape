@@ -1,105 +1,82 @@
 import { Reveal } from "../components/motion/Reveal";
-import { RevealGroup, revealItem } from "../components/motion/RevealGroup";
-import { motion } from "framer-motion";
 import { SectionIntro } from "../components/ui/SectionIntro";
 import { Button } from "../components/ui/Button";
-import groupAvatar from "../assets/icons/group-avatar.svg";
-import userMultiple from "../assets/icons/user-multiple-02.svg";
-import messageSquareDot from "../assets/icons/message-square-dot.svg";
-import accountRecovery from "../assets/icons/account-recovery.svg";
-import promotion from "../assets/icons/promotion.svg";
-import aiChat from "../assets/icons/ai-chat-01.svg";
+import { GridTile } from "../components/graphics/GridTile";
+import { HiveColumn } from "../components/hive/HiveColumn";
+import { hiveColumns } from "../components/hive/hiveColumns";
+import bandMosaic from "../assets/backgrounds/band-mosaic.png";
 
-const orbitTags = [
-  { icon: userMultiple, label: "Leads", position: "left-[6%] top-[14%]" },
-  { icon: messageSquareDot, label: "Replies", position: "right-[10%] top-[8%]" },
-  { icon: accountRecovery, label: "Out reach", position: "left-[2%] top-[62%]" },
-  { icon: promotion, label: "Campaigns", position: "right-[4%] top-[58%]" },
-  { icon: aiChat, label: "Follow-ups", position: "left-[38%] top-[86%]" },
-];
+/** The gradient the panel is matted in (node 3144:10470). */
+const PANEL_GRADIENT =
+  "linear-gradient(97.22deg, #ff2f2f 4.65%, #ef7b16 39.21%, #8a43e1 71.1%, #d511fd 99.84%)";
 
-const weeks = [
-  { label: "Week 1", title: "Learning your business" },
-  { label: "Week 3", title: "Connecting the dots" },
-  { label: "Week 5", title: "Building your sales intelligence" },
-];
-
-/** node 3139:11509 "Frame 2147263274" — the closing "Collective Hive Knowledge" section. */
+/**
+ * node 3144:10401 "Frame 2147263274" — "Collective Hive Knowledge that
+ * Improves for weeks".
+ *
+ * Three weeks of the same mind-map, each one denser than the last: week 1
+ * is five tags around the orb, week 3 adds scattered signal, week 5 is
+ * seven tags in a field of it. Below them the reassurance line and the CTA
+ * sit directly on the gradient matte.
+ */
 export function HiveSection() {
   return (
-    <section className="bg-paper py-24">
-      <SectionIntro
-        headline="Collective Hive Knowledge that Improves for weeks"
-        body={
-          <>
-            RedApe learns from what works, adapts your outreach, and gets better at turning
-            conversations into customers every week.
-          </>
-        }
-        className="mb-14"
-      />
+    <section className="relative overflow-hidden bg-paper">
+      {/* grid band behind the heading */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 hidden h-[551px] md:block">
+        <GridTile />
+        <GridTile mirrored />
+      </div>
 
-      <Reveal y={56} delay={0.1}>
-        <div className="bg-brand-green px-4 py-16 sm:px-10 md:py-24">
-          <div
-            className="mx-auto max-w-[1110px] rounded-[24px] p-[2px]"
-            style={{
-              backgroundImage:
-                "linear-gradient(97deg, #ff2f2f 5%, #ef7b16 39%, #8a43e1 71%, #d511fd 100%)",
-            }}
-          >
-            <div className="grid gap-6 rounded-[22px] bg-surface p-6 sm:p-8 lg:grid-cols-[1fr_1fr]">
-              {/* Hive orb visual */}
-              <div className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-[18px] bg-white/70">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.9),transparent_65%)]" />
-                <div className="relative flex size-[150px] items-center justify-center rounded-full border border-white bg-gradient-to-b from-white/80 to-white/40 shadow-[0_0_40px_rgba(255,255,255,0.8)]">
-                  <img src={groupAvatar} alt="" className="size-16 rounded-full object-cover" />
-                </div>
+      <div className="relative mx-auto w-full max-w-[1728px] px-4 sm:px-[84px]">
+        <SectionIntro
+          headline="Collective Hive Knowledge that Improves for weeks"
+          body={
+            <>
+              RedApe learns from what works, adapts your outreach, and gets better at turning
+              conversations into customers every week.
+            </>
+          }
+          className="pb-[43px] pt-16 lg:pt-[60px]"
+        />
 
-                {orbitTags.map((tag) => (
-                  <span
-                    key={tag.label}
-                    className={`absolute flex items-center gap-1.5 rounded-full border-2 border-white bg-chip px-3 py-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.12)] ${tag.position}`}
-                  >
-                    <span className="flex size-5 items-center justify-center rounded bg-gradient-to-b from-[#292929] to-[#111]">
-                      <img src={tag.icon} alt="" className="size-3" />
-                    </span>
-                    <span className="font-mono-ui text-micro font-medium text-ink-soft">
-                      {tag.label}
-                    </span>
-                  </span>
+        <Reveal y={56} delay={0.1}>
+          <div className="relative overflow-hidden bg-brand-green px-4 py-10 sm:px-10">
+            <img
+              src={bandMosaic}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 size-full object-bottom"
+            />
+
+            <div
+              className="relative mx-auto flex max-w-[1110px] flex-col gap-2.5 p-2.5"
+              style={{ backgroundImage: PANEL_GRADIENT }}
+            >
+              <div className="flex flex-col border border-black/10 bg-surface lg:flex-row">
+                {hiveColumns.map((column, i) => (
+                  <HiveColumn
+                    key={column.week}
+                    column={column}
+                    /* Week 1 is the narrow column in the file; the other two split the rest. */
+                    className={i === 0 ? "lg:w-[32.32%]" : "lg:flex-1"}
+                  />
                 ))}
               </div>
 
-              {/* Week timeline */}
-              <RevealGroup className="flex flex-col justify-center gap-4">
-                {weeks.map((week) => (
-                  <motion.div
-                    key={week.label}
-                    variants={revealItem}
-                    className="flex flex-col gap-1.5 rounded-xl border border-line-soft bg-white px-6 py-5"
-                  >
-                    <p className="font-display text-h3 font-bold text-ink">
-                      {week.label}
-                    </p>
-                    <p className="font-sans text-body font-medium text-muted-2">{week.title}</p>
-                  </motion.div>
-                ))}
-              </RevealGroup>
+              <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+                <p className="max-w-[756px] font-sans text-[19px] font-medium leading-[1.33] tracking-[-0.38px] text-white">
+                  Your data stays yours. RedApe uses secure, encrypted connections and never reads
+                  your personal messages.
+                </p>
+                <Button withArrow className="shrink-0">
+                  Start Free trail now
+                </Button>
+              </div>
             </div>
           </div>
-
-          <div className="mx-auto mt-10 flex max-w-[1110px] flex-col items-center justify-between gap-6 sm:flex-row">
-            <p className="max-w-[52ch] text-center font-sans text-lead font-medium leading-snug text-white sm:text-left">
-              Your data stays yours. RedApe uses secure, encrypted connections and never reads
-              your personal messages.
-            </p>
-            <Button withArrow className="shrink-0">
-              Start Free trail now
-            </Button>
-          </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

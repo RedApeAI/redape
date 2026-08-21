@@ -36,10 +36,14 @@ export function Button({
         base,
         sizes[size],
         dark ? "focus-visible:ring-white/70 focus-visible:ring-offset-nav-dark" : "focus-visible:ring-ink/40 focus-visible:ring-offset-paper",
+        // `font-display` sits outside the tone branch on purpose: the two families
+        // set different widths, so splitting it made the button resize as the nav
+        // inverted over a dark band.
+        variant === "primary" && "font-display",
         variant === "primary" &&
           (dark
             ? "bg-paper text-ink hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_10px_24px_-10px_rgba(0,0,0,0.6)]"
-            : "bg-ink font-display text-paper hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_12px_26px_-12px_rgba(0,0,0,0.65)]"),
+            : "bg-ink text-paper hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_12px_26px_-12px_rgba(0,0,0,0.65)]"),
         variant === "outline" &&
           (dark
             ? "border border-white/30 text-white hover:border-white/70 hover:bg-white/10"
