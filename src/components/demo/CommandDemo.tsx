@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { HandCursor } from "../graphics/HandCursor";
-import cardGlow from "../../assets/backgrounds/card-glow.webp";
+import cardGlow from "../../assets/backgrounds/card-glow.png";
 import apePeek from "../../assets/images/ape-peek.png";
 import plusSign from "../../assets/icons/plus-sign.svg";
 import sendIcon from "../../assets/icons/send.svg";

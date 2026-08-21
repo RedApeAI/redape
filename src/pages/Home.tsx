@@ -5,6 +5,7 @@ import { IntegrationsSection } from "../sections/IntegrationsSection";
 import { CommandSection } from "../sections/CommandSection";
 import { DashboardSection } from "../sections/DashboardSection";
 import { HiveSection } from "../sections/HiveSection";
+import { ClosingSection } from "../sections/ClosingSection";
 
 export function Home() {
   return (
@@ -16,6 +17,7 @@ export function Home() {
         <CommandSection />
         <DashboardSection />
         <HiveSection />
+        <ClosingSection />
       </main>
       <Footer />
     </div>
