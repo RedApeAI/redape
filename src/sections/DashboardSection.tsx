@@ -70,7 +70,7 @@ export function DashboardSection() {
               >
                 <div
                   className="absolute inset-0 opacity-10"
-                  style={{ backgroundImage: `url(${hatchTile})`, backgroundSize: "11.2px 11.2px" }}
+                  style={{ backgroundImage: `url("${hatchTile}")`, backgroundSize: "11.2px 11.2px" }}
                 />
               </div>
 

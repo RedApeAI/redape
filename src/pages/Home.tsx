@@ -6,6 +6,8 @@ import { CommandSection } from "../sections/CommandSection";
 import { DashboardSection } from "../sections/DashboardSection";
 import { HiveSection } from "../sections/HiveSection";
 import { ClosingSection } from "../sections/ClosingSection";
+import { FaqSection } from "../sections/FaqSection";
+import { RedCtaSection } from "../sections/RedCtaSection";
 
 export function Home() {
   return (
@@ -18,6 +20,8 @@ export function Home() {
         <DashboardSection />
         <HiveSection />
         <ClosingSection />
+        <FaqSection />
+        <RedCtaSection />
       </main>
       <Footer />
     </div>

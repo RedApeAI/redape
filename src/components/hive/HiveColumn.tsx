@@ -17,7 +17,7 @@ export function HiveColumn({ column, className }: { column: HiveColumnSpec; clas
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-[12px] opacity-[0.08]"
-          style={{ backgroundImage: `url(${hatchTile})`, backgroundSize: "15.54px 15.54px" }}
+          style={{ backgroundImage: `url("${hatchTile}")`, backgroundSize: "15.54px 15.54px" }}
         />
 
         <FitStage width={column.width} height={HIVE_STAGE_HEIGHT} className="relative overflow-hidden">

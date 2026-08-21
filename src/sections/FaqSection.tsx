@@ -36,7 +36,7 @@ export function FaqSection() {
         <Reveal>
           <div className="flex flex-col items-start gap-5">
             <Eyebrow>[ FAQ ]</Eyebrow>
-            <h2 className="font-display text-h2 text-balance text-black lg:max-w-[9ch]">
+            <h2 className="font-display text-h2 text-balance text-black lg:max-w-[13ch]">
               Frequently asked questions
             </h2>
             <p className="max-w-[46ch] font-sans text-lead font-medium text-muted">
@@ -94,7 +94,7 @@ export function FaqSection() {
               })}
             </ul>
 
-            <Button variant="outline" size="sm" withArrow>
+            <Button size="sm" withArrow>
               Read More
             </Button>
           </div>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { cx } from "../../lib/cx";
+import { MaskIcon } from "../ui/MaskIcon";
 import type { NavMenu } from "./navConfig";
 import chevronDown from "../../assets/icons/chevron-down.svg";
 
@@ -40,10 +41,10 @@ export function NavMenuPanel({ menu, dark }: NavMenuPanelProps) {
                 <span
                   className={cx(
                     "flex size-9 shrink-0 items-center justify-center rounded-card transition-colors duration-150",
-                    dark ? "bg-white/10" : "bg-surface-3 group-hover/row:bg-white",
+                    dark ? "bg-white/10 text-white" : "bg-surface-3 text-ink group-hover/row:bg-white",
                   )}
                 >
-                  <img src={item.icon} alt="" className={cx("size-[18px]", dark && "invert")} />
+                  <MaskIcon src={item.icon} className="size-[18px]" />
                 </span>
               )}
               <span className="min-w-0 flex-1">
@@ -66,12 +67,11 @@ export function NavMenuPanel({ menu, dark }: NavMenuPanelProps) {
                   </span>
                 )}
               </span>
-              <img
+              <MaskIcon
                 src={chevronDown}
-                alt=""
                 className={cx(
                   "size-4 shrink-0 -rotate-90 opacity-0 transition-all duration-150 group-hover/row:translate-x-0.5 group-hover/row:opacity-60",
-                  dark && "invert",
+                  dark ? "text-white" : "text-ink",
                 )}
               />
             </a>

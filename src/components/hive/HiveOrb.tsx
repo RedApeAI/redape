@@ -23,7 +23,7 @@ export function HiveOrb({ className, style }: { className?: string; style?: Reac
           <div className="absolute inset-0 bg-[red] mix-blend-overlay" />
           <div
             className="absolute inset-0 opacity-40 mix-blend-plus-lighter"
-            style={{ backgroundImage: `url(${orbNoise})`, backgroundSize: `${NOISE_TILE}px ${NOISE_TILE}px` }}
+            style={{ backgroundImage: `url("${orbNoise}")`, backgroundSize: `${NOISE_TILE}px ${NOISE_TILE}px` }}
           />
         </div>
 
