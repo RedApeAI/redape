@@ -155,16 +155,7 @@ export function IntegrationsSection() {
           aria-hidden
           className="pointer-events-none absolute inset-0 size-full object-cover"
         />
-        {/*
-          This band's copy is left-aligned at 248px rather than centred, so the
-          clear column is expressed as "everything but a 220px gutter" instead
-          of a fixed width.
-        */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 hidden h-[676px] md:block"
-          style={{ "--grid-clear": "calc(100% - 440px)" } as React.CSSProperties}
-        >
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 hidden h-[676px] md:block">
           <GridTile mirrored />
         </div>
 

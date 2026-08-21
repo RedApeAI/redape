@@ -28,8 +28,8 @@ export function CommandSection() {
     <section className="relative overflow-hidden bg-paper">
       {/* grid band behind the heading */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 hidden h-[551px] md:block">
-        <GridTile />
-        <GridTile mirrored />
+        <GridTile variant={2} />
+        <GridTile variant={2} mirrored />
       </div>
 
       <div className="relative mx-auto w-full max-w-[1728px] px-4 sm:px-[84px]">

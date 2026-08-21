@@ -9,26 +9,19 @@ import hatchMask from "../../assets/backgrounds/grid-hatch-mask.png";
  * resolution-independent, and no negative-inset rotation hacks. Only the
  * hatched cell keeps its original PNG, used as an alpha mask as designed.
  *
- * The tile is always anchored to an edge of its positioned parent and
- * pulled up by 231px, matching how every band in the file places it.
+ * Two styles ship in the file, and they are the same artwork at different
+ * heights — every rule, star, dot and hatch cell lines up once you account
+ * for the offset, and the exported strokes are the same #d9d9d9/#e6e6e6.
  *
- * It is drawn inside a *gutter* rather than free on the page: the leftover
- * space once the centred text column (--grid-clear) is taken out of the
- * band. Two 554px tiles only leave a clean centre above ~2018px viewports,
- * so below that the tile's full-width horizontal rule used to run straight
- * through the headline. The gutter keeps it off the type at every width,
- * and its inner edge is feathered so the pattern reads as running off the
- * page instead of stopping at a hard cut.
+ *   1 (3144:9636) sits 231px above the band. Its long horizontal rule lands
+ *     133.5px down, which is inside the headline on a 551px band.
+ *   2 (3177:202)  sits 356.3px above it — 125.3px higher — putting that rule
+ *     8px down, clear above the headline, and clips the tile to the band so
+ *     the full-height vertical rule stops at its bottom edge.
  */
 
 const RULE = "#d9d9d9";
 const DOT = "#e6e6e6";
-
-/** Width of the centred column the tiles must stay out of, unless a band overrides it. */
-const DEFAULT_CLEAR = "1000px";
-
-/** How much of the gutter's inner edge is faded out rather than clipped. */
-const FEATHER = "72px";
 
 /** 4-point star that marks a grid intersection (Figma "Subtract", 14.16x14). */
 const STAR =
@@ -37,24 +30,17 @@ const STAR =
 const DOT_COLUMNS = [382, 400, 417, 435];
 const DOT_ROWS = [414.6, 431.6];
 
-const FADE = `linear-gradient(to right, transparent 0, #000 ${FEATHER})`;
+interface GridTileProps {
+  mirrored?: boolean;
+  /** Which of the file's two grid styles to draw. See the note above. */
+  variant?: 1 | 2;
+}
 
-export function GridTile({ mirrored = false }: { mirrored?: boolean }) {
-  return (
-    <div
-      className={`absolute top-[-231px] h-[907px] overflow-hidden ${
-        mirrored ? "left-0 -scale-x-100" : "right-0"
-      }`}
-      style={{
-        /* The mirrored copy is flipped here rather than on the tile, so the
-           feather always runs from the wrapper's local left — which is the
-           inner edge on both sides once the flip is applied. */
-        width: `min(554px, max(0px, (100% - var(--grid-clear, ${DEFAULT_CLEAR})) / 2))`,
-        maskImage: FADE,
-        WebkitMaskImage: FADE,
-      }}
-    >
-      <div className="absolute right-0 top-0 h-[907px] w-[554px]">
+export function GridTile({ mirrored = false, variant = 1 }: GridTileProps) {
+  const edge = mirrored ? "left-0 -scale-x-100" : "right-0";
+
+  const artwork = (
+      <>
         <svg width="554" height="907" viewBox="0 0 554 907" fill="none" className="block">
           {/* full-length rules */}
           <line x1="471" y1="0" x2="471" y2="907" stroke={RULE} />
@@ -90,7 +76,16 @@ export function GridTile({ mirrored = false }: { mirrored?: boolean }) {
             WebkitMaskRepeat: "no-repeat",
           }}
         />
-      </div>
-    </div>
+    </>
   );
+
+  if (variant === 2) {
+    return (
+      <div className={`absolute inset-y-0 w-[554px] overflow-hidden ${edge}`}>
+        <div className="absolute top-[-356.3px] h-[907px] w-[554px]">{artwork}</div>
+      </div>
+    );
+  }
+
+  return <div className={`absolute top-[-231px] h-[907px] w-[554px] ${edge}`}>{artwork}</div>;
 }

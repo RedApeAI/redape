@@ -16,20 +16,15 @@ interface HeroGridProps {
  * Figma builds this from one 554x907 tile placed four times: a top band
  * (3144:9696) and a bottom band (3144:9635) that is the top band mirrored
  * vertically, each holding a right-hand tile plus a horizontally mirrored
- * copy on the left. GridTile keeps each one inside its gutter so the centre
- * column stays clean for the headline at any width.
+ * copy on the left. That leaves the centre column clean for the headline.
  */
 export function HeroGrid({ topOffset = 0, className = "" }: HeroGridProps) {
   return (
-    <div
-      aria-hidden
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
-      /* the hero headline is wider than a section headline, so it needs a wider clear column */
-      style={{ "--grid-clear": "1200px" } as React.CSSProperties}
-    >
+    <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
       {/*
         The tiles hug the left and right edges rather than a fixed 1728px
-        canvas, so the decoration stays on-screen at any width.
+        canvas, so the decoration stays on-screen at any width and is
+        pixel-identical to the design at 1728.
       */}
       <div className="absolute inset-x-0 h-[1081px]" style={{ top: -topOffset }}>
         {/* top band */}
