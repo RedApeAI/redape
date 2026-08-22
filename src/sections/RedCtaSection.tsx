@@ -20,7 +20,7 @@ export function RedCtaSection() {
         className="pointer-events-none absolute inset-0 size-full opacity-50"
       />
 
-      <div className="relative mx-auto w-full max-w-[1728px] px-4 py-20 sm:px-[84px] lg:py-[120px]">
+      <div className="relative mx-auto w-full max-w-[1728px] px-6 py-20 sm:px-[84px] lg:py-[120px]">
         <Reveal>
           <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
             <div className="flex flex-col items-start gap-6">

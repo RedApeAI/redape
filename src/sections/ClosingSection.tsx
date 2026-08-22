@@ -1,50 +1,38 @@
 import { Reveal } from "../components/motion/Reveal";
 import { Button } from "../components/ui/Button";
 import logoMark from "../assets/icons/logo-mark.svg";
-import closingGlow from "../assets/images/closing-glow.webp";
 
 /**
- * node 3144:10739 "Frame 2147263279" — the closing CTA that ends the page.
+ * node 3193:661 "Frame 2147263287" — the closing CTA that ends the page.
  *
- * A 1730x373 band: the logo on a white plate at the left, the headline and
- * its button at the right, and a soft colour bloom behind the type. The
- * plate's registration rules overhang it by different amounts on each side
- * (30px left, 168px right, 28px above, 57px below), which is what makes them
+ * A 1730x344 band: the logo plate and the headline/body/button group sit
+ * centred as a pair with a 50px gap, over a soft colour bloom. The plate's
+ * registration rules overhang it by different amounts on each side
+ * (26px left, 144px right, 24px above, 49px below), which is what makes them
  * read as crop marks rather than a drawn box — so they are placed off the
  * plate's own edges rather than as a border.
  */
 
 /** The plate, in the file's pixels. Every crop mark is measured off this box. */
-const PLATE = { width: 284, height: 155 };
+const PLATE = { width: 242, height: 132 };
 
-/** Rules hang off the plate by these amounts (Figma 3144:10751-10754). */
-const MARK = { up: 27.92, down: 56.92, left: 30.37, right: 168.44 };
+/** Rules hang off the plate by these amounts (Figma 3193:675-678). */
+const MARK = { up: 23.8, down: 48.51, left: 25.88, right: 143.56 };
 
 const markLine = "absolute bg-black/15";
 
 export function ClosingSection() {
   return (
-    <section className="relative overflow-hidden bg-[#f7f5f5]">
-      {/*
-        The bloom is a tall soft blur, so the file fits it by height and lets
-        it sit centred rather than stretching it across the band.
-      */}
-      <img
-        src={closingGlow}
-        alt=""
-        aria-hidden
-        className="pointer-events-none absolute inset-0 size-full object-contain"
-      />
-
-      <div className="relative mx-auto flex w-full max-w-[1728px] flex-col gap-12 px-4 py-16 sm:px-[84px] xl:flex-row xl:items-start xl:gap-[140px] xl:pb-[53px] xl:pt-[65px] 2xl:gap-[227px]">
+    <section className="relative overflow-hidden bg-white">
+      <div className="relative mx-auto flex w-full max-w-[1728px] flex-col items-start gap-12 px-6 py-16 sm:px-[100px] xl:flex-row xl:items-center xl:justify-center xl:gap-[11em] xl:py-[70px]">
         <Reveal>
           <div
-            className="relative shrink-0 bg-[#eee] xl:mt-[17px]"
+            className="relative shrink-0 origin-top-left scale-[0.8] bg-[#eee] sm:scale-100"
             style={{ width: PLATE.width, height: PLATE.height }}
           >
-            <div className="absolute inset-0 flex items-center justify-center gap-[6.26px] rounded-[27px] bg-white">
-              <img src={logoMark} alt="" aria-hidden className="w-[38.81px]" />
-              <span className="font-sans text-[32.55px] font-bold tracking-[-0.651px] text-ink">
+            <div className="absolute inset-0 flex items-center justify-center gap-[5.34px] rounded-[23.01px] bg-white">
+              <img src={logoMark} alt="" aria-hidden className="w-[33.08px]" />
+              <span className="font-sans text-[27.74px] font-bold tracking-[-0.55px] text-ink">
                 RedApe
               </span>
             </div>
@@ -60,17 +48,22 @@ export function ClosingSection() {
         <div className="flex flex-col items-start gap-5">
           <Reveal delay={0.05}>
             {/*
-              The file sets this at 73.89px; that read too heavy next to the
-              plate, so it steps down to 60. Leading and tracking are kept as
-              the design's ratios (1.22 / -0.02em) rather than its pixel
-              values, so they stay correct if the size is dialled again.
+              Leading and tracking are kept as the design's ratios
+              (1.22 / -0.02em) rather than its pixel values, so they stay
+              correct if the size is dialled again.
             */}
-            <h2 className="font-display text-h2 text-balance text-black xl:max-w-[600px] xl:text-[60px] xl:leading-[1.22] xl:tracking-[-0.02em]">
+            <h2 className="font-display text-balance text-[28px] leading-[1.22] tracking-[-0.02em] text-black sm:text-[32px] xl:whitespace-nowrap xl:text-[32px] 2xl:text-[36px]">
               Intelligent Choice for <span className="font-semibold">Intelligent People</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <Button withArrow className="sm:px-6 sm:py-3.5 sm:text-[18px]">
+            <p className="max-w-[46ch] font-sans text-body font-medium text-muted">
+              Your data stays yours. RedApe uses secure, encrypted connections and never reads your
+              personal messages.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <Button withArrow size="sm">
               Get Started with 14 days free trail
             </Button>
           </Reveal>

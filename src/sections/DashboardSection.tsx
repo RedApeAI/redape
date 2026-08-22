@@ -16,8 +16,8 @@ const STAGE = { width: 1385, height: 757 };
 const PLACES = {
   stats: { left: 348, top: 153.21 },
   actions: { left: 686.17, top: 158.04 },
-  calendar: { left: 329, top: 362.92 },
-  funnel: { left: 685.69, top: 362.92 },
+  calendar: { left: 758.69, top: 362.92 },
+  funnel: { left: 286, top: 362.92 },
 };
 
 /**

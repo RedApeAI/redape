@@ -32,7 +32,7 @@ export function FaqSection() {
 
   return (
     <section className="bg-paper">
-      <div className="mx-auto grid w-full max-w-[1728px] gap-12 px-4 py-20 sm:px-[84px] lg:grid-cols-2 lg:gap-[120px] lg:py-[120px]">
+      <div className="mx-auto grid w-full max-w-[1728px] gap-12 px-6 py-20 sm:px-[84px] lg:grid-cols-2 lg:gap-[120px] lg:py-[120px]">
         <Reveal>
           <div className="flex flex-col items-start gap-5">
             <Eyebrow>[ FAQ ]</Eyebrow>
